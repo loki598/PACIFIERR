@@ -3,15 +3,13 @@ import requests
 from googlesearch import search
 import nmap
 import pyfiglet
-from datetime import datetimeif 
+from datetime import datetime
+import subprocess
 import os
+
+
 if os.geteuid() != 0:
     exit("You need to have root privileges to run this script.\nPlease try again, this time using 'sudo'. Exiting.")
-
-
-
-
-
 #Google
 def google():
 	querry = input("Enter your querry :")
@@ -22,7 +20,6 @@ def google():
 
 
 #sub domains
-import requests
 
 # function for scanning subdomains
 def sed():
@@ -66,6 +63,8 @@ def sed():
 		 sub_dom = name.splitlines()
 		
 	# calling the function for scanning the subdomains
+
+
 	# and getting the url
 	 domain_scanner(dom_name,sub_dom)
 	
@@ -137,35 +136,61 @@ def dos():
 
 
 #banner
-
-ascii_banner =pyfiglet.figlet_format("PACIFIER")
-print(ascii_banner)
-now = datetime.now()
-current_time = now.strftime("%H:%M:%S")
-print("local time :  ", current_time)
+def banner():
+ ascii_banner =pyfiglet.figlet_format("PACIFIER")
+ print(ascii_banner)
+ now = datetime.now()
+ current_time = now.strftime("%H:%M:%S")
+ print("local time :  ", current_time)
 
 #end of banner
 
 
 
 #intro
+def menu():
+ print("1 passive info gathering\n")
+ print("2 sub domain enumaration\n")
+ print("3 scanner\n")
+ print("4 dos attaking\n")
+ print("5 help\n")
 
-print("1 passive info gathering\n")
-print("2 sub domain enumaration\n")
-print("3 scanner\n")
-print("4 dos attaking\n")
-print("5 help\n")
-
-start = int(input("Enter Opt     :"))
+ #start = int(input("Enter Opt     :"))
 #end of into
-if start==1:
-	google()
-elif start==2:
-	sed()
-elif start==3:
-	scanner()
-elif start==4:
-	dos()
-elif start==5:
+#if start==1:
+#	google()
+#elif start==2:
+#	sed()
+#elif start==3:
+#	scanner()
+#elif start==4:
+#	dos()
+#elif start==5:
 #enter help text
-	print("help alla kope")
+#	print("help alla kope")#
+def help():
+ print ("do u  need help for this")
+
+if __name__=='__main__':
+    while(True):
+        menu()
+        option = ''
+        try:
+            option = int(input('Enter your choice: '))
+        except:
+            print('Wrong input. Please enter a number ...')
+        #Check what choice was entered and act accordingly
+        if option == 1:
+           google()
+        elif option == 2:
+            sed()
+        elif option == 3:
+            scanner()
+        elif option == 4:
+            dos()
+        
+        elif option == 5:
+	    help()
+
+ 	else:
+	    print('Invalid option. Please enter a number between 1 and 5') 
