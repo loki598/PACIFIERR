@@ -3,7 +3,13 @@ import requests
 from googlesearch import search
 import nmap
 import pyfiglet
-from datetime import datetime
+from datetime import datetimeif 
+import os
+if os.geteuid() != 0:
+    exit("You need to have root privileges to run this script.\nPlease try again, this time using 'sudo'. Exiting.")
+
+
+
 
 
 #Google
